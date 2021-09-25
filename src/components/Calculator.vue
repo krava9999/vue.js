@@ -1,7 +1,7 @@
 ﻿<template>
    <div>
-       <input id="operand1" v-model.number="operand1" @focus="checkRadio = 'left'" >
-       <input id="operand2" v-model.number="operand2" @focus="checkRadio = 'right'"> = {{result}}
+       <input id="operand1" v-model.number="operand1" @focus="checkRadio = 'left'"  type="number">
+       <input id="operand2" v-model.number="operand2" @focus="checkRadio = 'right' " type="number"> = {{result}}
         <div v-if="error">Ошибка! {{ error }}</div> <br>
           <label for="showKeyboard">
           <input id = "showKeyboard" type="checkbox"
@@ -105,24 +105,30 @@
      intPow(){
        return this.result = this.operand1 ** this.operand2
      },
-     innerInt(item){
+   
+       innerInt(item){
+         let btn1 = document.getElementById("operand1").value;
+         let btn2 = document.getElementById("operand2").value;
+
        switch (this.checkRadio) {
          case "left":
-           if (item === "del"){
-            let btn = document.getElementById("operand1").value;
-             this.operand1 = +(btn.slice(0,-1));
-           } else{
-           this.operand1 = +(string(btn) + `${item}`)
+          if (item === "del"){
+            this.operand1 = +(String(btn1.slice(0,-1)));
+            console.log(this.operand1);
+          } else {
+                this.operand1 = btn1 + item;
+          }
            break;
-           }
+           
           case 'right':
-           if (item === "del"){
-            let btn = document.getElementById("operand2").value;
-             this.operand2 = +(btn.slice(0,-1));
-           } else{
-           this.operand2 = +(string(btn) + `${item}`)
+                if (item === "del"){
+            this.operand2 = +(String(btn2.slice(0,-1)));
+            console.log(this.operand1);
+          } else {
+                this.operand2 = btn2 + item;
+          }
            break;
-           }
+           
        }
       }
      
